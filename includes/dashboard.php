@@ -16,7 +16,8 @@ function DisplayDashboard(){
 
   // battery life
   exec("sudo /user/local/bin/battery.sh", $return);
-  $batlife = preg_replace( '/\s\s+/', ' ', $return );
+  $return = preg_replace( '/\s\s+/', ' ', $return );
+  $batlife = $return[1];
   if	($batlife > 50) { $batlife_status = "success"; }
   elseif	($batlife > 15) { $batlife_status = "warning"; }
   elseif	($batlife < 15) { $batlife_status = "danger"; }
