@@ -14,6 +14,12 @@ function DisplayDashboard(){
   $strWlan0 = implode( " ", $return );
   $strWlan0 = preg_replace( '/\s\s+/', ' ', $strWlan0 );
 
+  // battery life
+  $batlife = exec("sudo /user/local/bin/battery.sh");
+  if	($batlife > 50) { $batlife_status = "success"; }
+  elseif	($batlife > 15) { $batlife_status = "warning"; }
+  elseif	($batlife < 15) { $batlife_status = "danger"; }
+  
   // Parse results from ifconfig/iwconfig
   preg_match( '/HWaddr ([0-9a-f:]+)/i',$strWlan0,$result );
   $strHWAddress = $result[1];
@@ -77,6 +83,14 @@ function DisplayDashboard(){
                         <div class="col-md-6">
                         <div class="panel panel-default">
                   <div class="panel-body">
+                    <div class="info-item">Battery Life</div>
+                  <div class="progress">
+                  <div class="progress-bar progress-bar-<?php echo $batlife_status ?> progress-bar-striped active"
+                    role="progressbar"
+                    aria-valuenow="<?php echo $batlife ?>" aria-valuemin="0" aria-valuemax="100"
+                    style="width: <?php echo $batlife ?>%;"><?php echo $batlife ?>%
+                  </div>
+                  </div>
                       <h4>Interface Information</h4>
           <div class="info-item">Interface Name</div> wlan0</br>
           <div class="info-item">IP Address</div>     <?php echo $strIPAddress ?></br>
