@@ -1,5 +1,9 @@
 A simple, responsive web interface to control wifi, hostapd and related services on the C.H.I.P.
 
+https://bbs.nextthing.co/t/create-a-very-basic-wifi-access-point/1727
+
+https://slack-files.com/T02GVC9G6-F0H7G3WCT-25e7dfb781
+
 This project was inspired by a [**blog post**](http://sirlagz.net/2013/02/06/script-web-configuration-page-for-raspberry-pi/) by SirLagz about using a web page rather than ssh to configure wifi and hostapd settings on the Raspberry Pi. I mostly just prettified the UI by wrapping it in [**SB Admin 2**](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2), a Bootstrap based admin theme.
 
 ![](https://i.imgur.com/l4Vgd5G.png)
