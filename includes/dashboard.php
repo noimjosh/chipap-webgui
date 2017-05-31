@@ -15,7 +15,7 @@ function DisplayDashboard(){
   $strWlan0 = preg_replace( '/\s\s+/', ' ', $strWlan0 );
 
   // battery life
-  exec("sudo /user/local/bin/battery.sh", $retval);
+  exec("sudo /usr/local/bin/battery.sh", $retval);
   $batval = preg_replace( '/\s\s+/', ' ', $batval);
   preg_match( '/Batt:([0-9]+)/i',$batval,$result );
   $batlife = $result[1];
