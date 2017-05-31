@@ -124,3 +124,47 @@ Please note that these are only UI's for now. If there's enough interest I'll co
 
 ## License
 See the [LICENSE](./LICENSE) file.
+
+edit /var/www/html/includes/dashboard.php
+
+Add the following near the top, above this comment: // Parse results from ifconfig ...
+
+// battery life
+$batlife = exec("sudo /user/local/bin/battery.sh");
+if	($batlife > 50) { $batlife_status = "success"; }
+elseif	($batlife > 15) { $batlife_status = "warning"; }
+elseif	($batlife < 15) { $batlife_status = "danger"; }
+
+Add the following above the < h4>Interface Information< /h4> line:
+
+                <div class="info-item">Battery Life</div>
+                  <div class="progress">
+                  <div class="progress-bar progress-bar-<?php echo $batlife_status ?> progress-bar-striped active"
+                    role="progressbar"
+                    aria-valuenow="<?php echo $batlife ?>" aria-valuemin="0" aria-valuemax="100"
+                    style="width: <?php echo $batlife ?>%;"><?php echo $batlife ?>%
+                  </div>
+                  </div>
+add the following to the bottom of /etc/sudoers
+www-data ALL=(ALL) NOPASSWD:/usr/local/bin/battery.sh
+
+create /usr/local/bin/battery.sh if it doesnt already exist
+wget https://raw.githubusercontent.com/KoljaWindeler/CHIP-hwtest/master/chip-hwtest/bin/battery.sh3
+
+comment out the following lines in /usr/local/bin/battery.sh (put a # at the beginning of the line) since the only info we need is the percent charged
+echo "BAT_STATUS="$BAT_STATUS
+echo "CHARG_IND="$CHARG_IND
+echo "BAT_EXIST="$BAT_EXIST
+echo "CHARGE_CTL="$CHARGE_CTL
+echo "CHARGE_CTL2="$CHARGE_CTL2
+echo "Battery voltage = "$BAT_VOLT"mV"
+echo "Battery discharge current = "$BAT_IDISCHG"mA"
+echo "Battery charge current = "$BAT_ICHG"mA"
+echo "Internal temperature = "$TEMP_C"c"
+
+and change the last line from this:
+echo "Battery gauge = "$BAT_GAUGE_DEC"%"
+to this:
+echo $BAT_GAUGE_DEC
+
+Honestly though, the really useful part of this was getting the "configure client" page working. Once you get that up and running you can connect to RaspAP on wlan1 in order to configure wlan0 to connect to a wifi. I've got my chip running Mopidy and it connects to the internet for spotify on wlan0. With this tool I can take it where ever I want and connect it to wifi through the administrative interface. I also have it doing ip masquerade and nat so that it acts as an access point for users. Right now I'm working on the captive portal to push the Spotify page to users when they connect to my AP. It'll be my little mobile personal jukebox. I have it all packaged inside a mobile amplified speaker..... I should probably do a write up. It's pretty neat.
