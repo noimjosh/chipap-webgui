@@ -1,4 +1,4 @@
-
+<?php
 /**
 *
 *
@@ -53,7 +53,7 @@ function DisplayOpenVPNConfig() {
             	<div class="tab-pane fade in active" id="openvpnclient">
             		
             		<h4>Client settings</h4>
-					<form role="form" action="?page=save_hostapd_conf" method="POST">
+					<form role="form" action="?page=save_openvpn_conf" method="POST">
 
 					<div class="row">
 						<div class="form-group col-md-4">
@@ -129,3 +129,4 @@ function DisplayOpenVPNConfig() {
 </div><!-- /.row -->
 <?php
 }
+?>
