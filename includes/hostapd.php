@@ -26,7 +26,7 @@ function DisplayHostAPDConfig(){
   } elseif( isset($_POST['StartHotspot']) ) {
     if (CSRFValidate()) {
       $status->addMessage('Attempting to start hotspot', 'info');
-      exec( 'sudo /etc/init.d/hostapd start', $return );
+      exec( 'sudo /bin/systemctl start hostapd-systemd', $return );
       foreach( $return as $line ) {
         $status->addMessage($line, 'info');
       }
@@ -36,7 +36,7 @@ function DisplayHostAPDConfig(){
   } elseif( isset($_POST['StopHotspot']) ) {
     if (CSRFValidate()) {
       $status->addMessage('Attempting to stop hotspot', 'info');
-      exec( 'sudo /etc/init.d/hostapd stop', $return );
+      exec( 'sudo /bin/systemctl stop hostapd-systemd', $return );
       foreach( $return as $line ) {
         $status->addMessage($line, 'info');
       }
@@ -137,6 +137,7 @@ function DisplayHostAPDConfig(){
                   <label for="code">Country Code</label>
                   <input type="hidden" id="selected_country" value="<?php echo $arrConfig['country_code'] ?>">
                   <select  class="form-control"  id="countries" name="country_code"  style="background-color: #c0ffc0;">
+                    <option value="US">United States</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Åland Islands</option>
                     <option value="AL">Albania</option>
@@ -372,7 +373,6 @@ function DisplayHostAPDConfig(){
                     <option value="UA">Ukraine</option>
                     <option value="AE">United Arab Emirates</option>
                     <option value="GB">United Kingdom</option>
-                    <option value="US">United States</option>
                     <option value="UM">United States Minor Outlying Islands</option>
                     <option value="UY">Uruguay</option>
                     <option value="UZ">Uzbekistan</option>
