@@ -15,9 +15,10 @@ function DisplayDashboard(){
   $strWlan0 = preg_replace( '/\s\s+/', ' ', $strWlan0 );
 
   // battery life
-  echo exec("sudo /user/local/bin/battery.sh");
-  $retval = preg_replace( '/\s\s+/', ' ', $retval );
-  $batlife = $retval[0];
+  exec("sudo /user/local/bin/battery.sh", $retval);
+  $batval = preg_replace( '/\s\s+/', ' ', $batval);
+  preg_match( '/Batt:([0-9]+)/i',$batval,$result );
+  $batlife = $result[1];
   if	($batlife > 50) { $batlife_status = "success"; }
   elseif	($batlife > 15) { $batlife_status = "warning"; }
   elseif	($batlife < 15) { $batlife_status = "danger"; }
