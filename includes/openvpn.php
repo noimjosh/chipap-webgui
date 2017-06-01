@@ -35,8 +35,8 @@ function DisplayOpenVPNConfig() {
 	?>
 	<div class="row">
 	<div class="col-lg-12">
-    	<div class="panel panel-primary">           
-			<div class="panel-heading"><i class="fa fa-lock fa-fw"></i> Configure OpenVPN 
+    	<div class="panel panel-primary">
+			<div class="panel-heading"><i class="fa fa-lock fa-fw"></i> Configure OpenVPN
             </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -51,7 +51,7 @@ function DisplayOpenVPNConfig() {
            	<div class="tab-content">
            		<p><?php echo $status; ?></p>
             	<div class="tab-pane fade in active" id="openvpnclient">
-            		
+
             		<h4>Client settings</h4>
 					<form role="form" action="?page=save_openvpn_conf" method="POST">
 
@@ -72,7 +72,7 @@ function DisplayOpenVPNConfig() {
             		<h4>Server settings</h4>
             		<div class="row">
 						<div class="form-group col-md-4">
-            			<label for="code">Port</label> 
+            			<label for="code">Port</label>
             			<input type="text" class="form-control" name="openvpn_port" value="<?php echo $arrServerConfig['port'] ?>" />
 						</div>
 					</div>
@@ -129,4 +129,27 @@ function DisplayOpenVPNConfig() {
 </div><!-- /.row -->
 <?php
 }
+
+/**
+*
+*
+*/
+function SaveVPNConfig(){
+  if( isset($_POST['SaveOpenVPNSettings']) ) {
+    // TODO
+  } elseif( isset($_POST['StartOpenVPN']) ) {
+    echo "Attempting to start openvpn";
+    exec( 'sudo /usr/sbin/openvpn --config /etc/openvpn/client.conf', $return );
+    foreach( $return as $line ) {
+      echo $line."<br />";
+    }
+  } elseif( isset($_POST['StopOpenVPN']) ) {
+    echo "Attempting to stop openvpn";
+    exec( 'sudo /bin/systemctl stop openvpn', $return );
+    foreach( $return as $line ) {
+      echo $line."<br />";
+    }
+  }
+}
+
 ?>
