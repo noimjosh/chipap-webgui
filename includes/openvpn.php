@@ -5,6 +5,22 @@
 */
 function DisplayOpenVPNConfig() {
 
+	if( isset($_POST['SaveOpenVPNSettings']) ) {
+	  // TODO
+	} elseif( isset($_POST['StartOpenVPN']) ) {
+	  echo "Attempting to start openvpn";
+	  exec( 'sudo /usr/sbin/openvpn --config /etc/openvpn/client.conf', $return );
+	  foreach( $return as $line ) {
+	    echo $line."<br />";
+	  }
+	} elseif( isset($_POST['StopOpenVPN']) ) {
+	  echo "Attempting to stop openvpn";
+	  exec( 'sudo /bin/systemctl stop openvpn', $return );
+	  foreach( $return as $line ) {
+	    echo $line."<br />";
+	  }
+	}
+
 	exec( 'cat '. RASPI_OPENVPN_CLIENT_CONFIG, $returnClient );
 	exec( 'cat '. RASPI_OPENVPN_SERVER_CONFIG, $returnServer );
 	exec( 'pidof openvpn | wc -l', $openvpnstatus);
@@ -53,7 +69,7 @@ function DisplayOpenVPNConfig() {
             	<div class="tab-pane fade in active" id="openvpnclient">
 
             		<h4>Client settings</h4>
-					<form role="form" action="?page=save_openvpn_conf" method="POST">
+					<form role="form" action="?page=openvpn_conf" method="POST">
 
 					<div class="row">
 						<div class="form-group col-md-4">
@@ -130,26 +146,5 @@ function DisplayOpenVPNConfig() {
 <?php
 }
 
-/**
-*
-*
-*/
-function SaveVPNConfig(){
-  if( isset($_POST['SaveOpenVPNSettings']) ) {
-    // TODO
-  } elseif( isset($_POST['StartOpenVPN']) ) {
-    echo "Attempting to start openvpn";
-    exec( 'sudo /usr/sbin/openvpn --config /etc/openvpn/client.conf', $return );
-    foreach( $return as $line ) {
-      echo $line."<br />";
-    }
-  } elseif( isset($_POST['StopOpenVPN']) ) {
-    echo "Attempting to stop openvpn";
-    exec( 'sudo /bin/systemctl stop openvpn', $return );
-    foreach( $return as $line ) {
-      echo $line."<br />";
-    }
-  }
-}
 
 ?>
