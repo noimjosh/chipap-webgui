@@ -29,8 +29,8 @@ define('RASPI_HOSTAPD_CONFIG', '/etc/hostapd.conf');
 define('RASPI_WPA_SUPPLICANT_CONFIG', '/etc/wpa_supplicant/wpa_supplicant.conf');
 define('RASPI_HOSTAPD_CTRL_INTERFACE', '/var/run/hostapd');
 define('RASPI_WPA_CTRL_INTERFACE', '/var/run/wpa_supplicant');
-define('RASPI_OPENVPN_CLIENT_CONFIG', '/etc/openvpn/client.conf');
-define('RASPI_OPENVPN_SERVER_CONFIG', '/etc/openvpn/server.conf');
+define('RASPI_OPENVPN_CLIENT_CONFIG_FILENAME', 'client'); // client config filename without extension
+define('RASPI_OPENVPN_SERVER_CONFIG_FILENAME', 'server'); // server config filename without extension
 define('RASPI_TORPROXY_CONFIG', '/etc/tor/torrc');
 
 // Optional services, set to true to enable.

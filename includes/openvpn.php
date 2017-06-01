@@ -9,13 +9,13 @@ function DisplayOpenVPNConfig() {
 	  // TODO
 	} elseif( isset($_POST['StartOpenVPN']) ) {
 	  echo "Attempting to start openvpn";
-	  exec( 'sudo /bin/systemctl start openvpn', $return );
+	  exec( 'sudo /bin/systemctl start openvpn@'.RASPI_OPENVPN_CLIENT_CONFIG_FILENAME.'.service', $return );
 	  foreach( $return as $line ) {
 	    echo $line."<br />";
 	  }
 	} elseif( isset($_POST['StopOpenVPN']) ) {
 	  echo "Attempting to stop openvpn";
-	  exec( 'sudo /bin/systemctl stop openvpn', $return );
+	  exec( 'sudo /bin/systemctl stop openvpn@'.RASPI_OPENVPN_CLIENT_CONFIG_FILENAME.'.service', $return );
 	  foreach( $return as $line ) {
 	    echo $line."<br />";
 	  }
@@ -72,11 +72,13 @@ function DisplayOpenVPNConfig() {
 					<form role="form" action="?page=openvpn_conf" method="POST">
 
 					<div class="row">
+						<? /*
 						<div class="form-group col-md-4">
 	                        <label>Select OpenVPN configuration file (.ovpn)</label>
 	                        <input type="file" name="openvpn-config">
 	                    </div>
-					</div>
+					</div> */
+					?>
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label for="code">Client Log</label>
