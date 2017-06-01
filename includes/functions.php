@@ -155,7 +155,7 @@ function DisplayTorProxyConfig(){
 	?>
 	<div class="row">
 	<div class="col-lg-12">
-    	<div class="panel panel-primary">           
+    	<div class="panel panel-primary">
 			<div class="panel-heading"><i class="fa fa-eye-slash fa-fw"></i> Configure TOR proxy
             </div>
         <!-- /.panel-heading -->
@@ -192,13 +192,13 @@ function DisplayTorProxyConfig(){
 							<label for="code">AutomapHostsOnResolve</label>
 							<input type="text" class="form-control" name="automaphostsonresolve" value="<?php echo $arrConfig['AutomapHostsOnResolve']; ?>" />
 						</div>
-					</div>	
+					</div>
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label for="code">TransListenAddress</label>
 							<input type="text" class="form-control" name="translistenaddress" value="<?php echo $arrConfig['TransListenAddress']; ?>" />
 						</div>
-					</div>	
+					</div>
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label for="code">DNSPort</label>
@@ -251,9 +251,9 @@ function DisplayTorProxyConfig(){
 						</div>
 					</div>
             	</div>
-		
+
 				<input type="submit" class="btn btn-outline btn-primary" name="SaveTORProxySettings" value="Save settings" />
-				<?php 
+				<?php
 				if( $torproxystatus[0] == 0 ) {
 					echo '<input type="submit" class="btn btn-success" name="StartTOR" value="Start TOR" />';
 				} else {
@@ -267,30 +267,16 @@ function DisplayTorProxyConfig(){
     </div><!-- /.panel-primary -->
 </div><!-- /.col-lg-12 -->
 </div><!-- /.row -->
-<?php 
+<?php
 }
 
 /**
 *
 *
 */
-function SaveTORAndVPNConfig(){
-  if( isset($_POST['SaveOpenVPNSettings']) ) {
+function SaveTORConfig(){
+  if( isset($_POST['SaveTORProxySettings']) ) {
     // TODO
-  } elseif( isset($_POST['SaveTORProxySettings']) ) {
-    // TODO
-  } elseif( isset($_POST['StartOpenVPN']) ) {
-    echo "Attempting to start openvpn";
-    exec( 'sudo /etc/init.d/openvpn start', $return );
-    foreach( $return as $line ) {
-      echo $line."<br />";
-    }
-  } elseif( isset($_POST['StopOpenVPN']) ) {
-    echo "Attempting to stop openvpn";
-    exec( 'sudo /etc/init.d/openvpn stop', $return );
-    foreach( $return as $line ) {
-      echo $line."<br />";
-    }
   } elseif( isset($_POST['StartTOR']) ) {
     echo "Attempting to start TOR";
     exec( 'sudo /etc/init.d/tor start', $return );

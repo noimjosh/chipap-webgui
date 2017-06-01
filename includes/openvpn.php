@@ -9,7 +9,7 @@ function DisplayOpenVPNConfig() {
 	  // TODO
 	} elseif( isset($_POST['StartOpenVPN']) ) {
 	  echo "Attempting to start openvpn";
-	  exec( 'sudo /usr/sbin/openvpn --config /etc/openvpn/client.conf', $return );
+	  exec( 'sudo /bin/systemctl start openvpn', $return );
 	  foreach( $return as $line ) {
 	    echo $line."<br />";
 	  }
